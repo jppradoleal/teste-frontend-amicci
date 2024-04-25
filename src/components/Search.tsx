@@ -1,6 +1,7 @@
-import { Button, Stack, TextField, Typography } from '@mui/material'
+import { Button, InputAdornment, Stack, TextField, Typography, useTheme } from '@mui/material'
 import { FormEventHandler } from 'react'
 import { useStore } from '../store'
+import { Icon } from '@iconify/react'
 
 interface SearchProps {
   onSubmit: FormEventHandler
@@ -12,6 +13,8 @@ export function Search({ onSubmit }: Readonly<SearchProps>) {
     address: state.address,
     setAddress: state.setAddress
   }))
+  
+  const { palette: { primary } } = useTheme()
 
   return <form onSubmit={onSubmit}>
     <Stack gap={2} alignItems='center'>
@@ -21,11 +24,25 @@ export function Search({ onSubmit }: Readonly<SearchProps>) {
         value={address}
         onChange={(e) => setAddress(e.target.value)}
         fullWidth
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position='end'>
+              <Icon icon='mdi:map-marker' width={24} color={primary.main} />
+            </InputAdornment>
+          )
+        }}
       />
       <Button type='submit' variant='contained' fullWidth sx={{ py: 1, px: 2 }}>
         <Typography>Consultar</Typography>
       </Button>
-      <Button onClick={loadAddress} type='button' variant='contained' color='warning' size='small' sx={{ py: 1, px: 2 }}>
+      <Button
+        onClick={loadAddress}
+        type='button'
+        variant='contained'
+        color='warning'
+        size='small'
+        sx={{ py: 1, px: 2 }}
+      >
         <Typography variant='body2'>
           Minha localização
         </Typography>
