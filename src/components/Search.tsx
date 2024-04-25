@@ -32,7 +32,7 @@ export function Search({ onSubmit }: Readonly<SearchProps>) {
           )
         }}
       />
-      <Button type='submit' variant='contained' fullWidth sx={{ py: 1, px: 2 }}>
+      <Button type='submit' variant='contained' fullWidth sx={{ py: 1, px: 2 }} disabled={!address}>
         <Typography>Consultar</Typography>
       </Button>
       <Button

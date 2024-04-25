@@ -2,27 +2,27 @@ import { create } from "zustand";
 import { MAPS_API, OPENWEATHER_API } from "../constants";
 
 export interface Weather {
-  id: number
-  name: string
-  visibility: number
+  id: number;
+  name: string;
+  visibility: number;
   main: {
-    temp: number
-    feels_like: number
-    temp_min: number
-    temp_max: number
-    pressure: number
-    humidity: number
-  }
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
+  };
   weather: Array<{
-    id: number
-    main: string
-    description: string
-    icon: string
-  }>
+    id: number;
+    main: string;
+    description: string;
+    icon: string;
+  }>;
   wind: {
-    speed: number
-    deg: number
-  }
+    speed: number;
+    deg: number;
+  };
 }
 
 export interface WeatherAppState {
@@ -44,7 +44,7 @@ export const useStore = create<WeatherAppState>((set, get) => {
     longitude: null,
     getUserPosition: async () => {
       if (!navigator.geolocation) {
-        throw new Error("Geolocation feature not available");
+        throw new Error("Geolocalização não habilitada!");
       }
 
       const position: GeolocationPosition = await new Promise(
@@ -73,33 +73,45 @@ export const useStore = create<WeatherAppState>((set, get) => {
         }`
       );
 
+      if (!response.ok) {
+        throw new Error("Erro ao carregar endereço!");
+      }
+
       const data = await response.json();
 
       set({
-        address: data.results[data.results.length-4].formatted_address,
+        address: data.results[data.results.length - 4].formatted_address,
       });
 
-      await get().loadWeather()
+      await get().loadWeather();
     },
     loadWeather: async () => {
+      set({
+        weather: null,
+      })
+
       const { address } = get();
-      
+
       const response = await fetch(
         `${OPENWEATHER_API}/weather?appid=${
           import.meta.env.VITE_OPENWEATHER_API_KEY
         }&q=${address}&units=metric&lang=pt_BR`
       );
 
-      const data = await response.json()
+      if (!response.ok) {
+        throw new Error("Erro ao carregar dados do tempo!");
+      }
+
+      const data = await response.json();
 
       set({
-        weather: data
-      })
+        weather: data,
+      });
     },
     setAddress: (address: string) => {
       set({
-        address
-      })
-    }
+        address,
+      });
+    },
   };
 });
