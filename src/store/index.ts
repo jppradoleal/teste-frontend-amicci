@@ -50,7 +50,7 @@ export const useStore = create<WeatherAppState>((set, get) => {
       const position: GeolocationPosition = await new Promise(
         (resolve, reject) => {
           navigator.geolocation.getCurrentPosition(resolve, reject);
-        }
+        },
       );
 
       const { latitude, longitude } = position.coords;
@@ -70,7 +70,7 @@ export const useStore = create<WeatherAppState>((set, get) => {
       const response = await fetch(
         `${MAPS_API}/geocode/json?latlng=${latitude},${longitude}&key=${
           import.meta.env.VITE_MAPS_API_KEY
-        }`
+        }`,
       );
 
       if (!response.ok) {
@@ -88,14 +88,14 @@ export const useStore = create<WeatherAppState>((set, get) => {
     loadWeather: async () => {
       set({
         weather: null,
-      })
+      });
 
       const { address } = get();
 
       const response = await fetch(
         `${OPENWEATHER_API}/weather?appid=${
           import.meta.env.VITE_OPENWEATHER_API_KEY
-        }&q=${address}&units=metric&lang=pt_BR`
+        }&q=${address}&units=metric&lang=pt_BR`,
       );
 
       if (!response.ok) {
