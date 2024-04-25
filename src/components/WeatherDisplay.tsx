@@ -1,5 +1,6 @@
 import { Card, CardContent, Grid, Stack, Typography } from "@mui/material";
 import { useStore } from "../store";
+import { Widget } from "./WeatherWidget";
 import { toTitleCase } from "../utils";
 
 export function WeatherDisplay() {
@@ -23,6 +24,36 @@ export function WeatherDisplay() {
               <Typography variant="h6">{toTitleCase(weatherData.weather[0].description)}</Typography>
             </Stack>
           </Stack>
+        </Grid>
+        <Grid item xs={4}>
+          <Widget
+            label='Vento'
+            value={`${(weatherData.wind.speed * 3.6).toFixed(2)} km/h`}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <Widget
+            label='Umidade'
+            value={`${weatherData.main.humidity}%`}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <Widget
+            label='Sensação Térmica'
+            value={`${weatherData.main.feels_like} ºC`}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <Widget
+            label='Visibilidade'
+            value={`${weatherData.visibility / 1000}km`}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <Widget
+            label='Pressão'
+            value={`${weatherData.main.pressure}mb`}
+          />
         </Grid>
       </Grid>
     </CardContent>
