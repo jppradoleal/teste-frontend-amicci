@@ -1,8 +1,7 @@
+import { Weather } from "./pages/Weather";
+
 function App() {
-  return (
-    <>
-    </>
-  )
+  return <Weather />
 }
 
 export default App
