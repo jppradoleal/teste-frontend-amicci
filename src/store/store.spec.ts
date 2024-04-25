@@ -17,6 +17,8 @@ Object.defineProperty(navigator, "geolocation", {
   },
 });
 
+global.fetch = vi.fn();
+
 describe("Weather App Store", () => {
   beforeEach(() => {
     store.setState(store.getInitialState());
@@ -38,5 +40,20 @@ describe("Weather App Store", () => {
 
     expect(latitude).toBe(1);
     expect(longitude).toBe(0);
+  });
+
+  it("should call maps api and fill address attribute", async () => {
+    vi.mocked(fetch).mockResolvedValueOnce({
+      json: () =>
+        Promise.resolve({ results: [{ formatted_address: "Jacareí" }] }),
+    } as Response);
+
+    await store.getState().loadAddress();
+
+    const { address } = store.getState();
+
+    expect(fetch).toHaveBeenCalled();
+
+    expect(address).toBe("Jacareí");
   });
 });

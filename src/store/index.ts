@@ -7,8 +7,7 @@ export interface WeatherAppState {
   longitude: number | null;
   weather: Record<string, string> | null;
   getUserPosition: () => Promise<void>;
-  address: string | null
-  weather: Record<string, string> | null
+  loadAddress: () => Promise<void>;
 }
 
 export const useStore = create<WeatherAppState>((set, get) => {
@@ -35,7 +34,24 @@ export const useStore = create<WeatherAppState>((set, get) => {
         longitude,
       });
     },
-    weather: null
-  }
-})
+    loadAddress: async () => {
+      const { getUserPosition } = get();
+      
+      await getUserPosition();
+      
+      const { latitude, longitude } = get();
+      
+      const response = await fetch(
+        `${MAPS_API}/geocode/json?latlng=${latitude},${longitude}&key=${
+          import.meta.env.VITE_MAPS_API_KEY
+        }`
+      );
+
+      const data = await response.json();
+
+      set({
+        address: data.results[0].formatted_address,
+      });
+    },
+  };
 });
