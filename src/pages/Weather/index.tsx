@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 import { toast } from "react-toastify";
-import { Search } from "../../components/Search";
-import { WeatherDisplay } from "../../components/WeatherDisplay";
+import { Search } from "./components/Search";
+import { WeatherDisplay } from "./components/WeatherDisplay";
 import { useStore } from "../../store";
 
 export function Weather() {

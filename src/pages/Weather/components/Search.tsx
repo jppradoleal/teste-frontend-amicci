@@ -1,6 +1,6 @@
 import { Button, InputAdornment, Stack, TextField, Typography, useTheme } from '@mui/material'
 import { FormEventHandler } from 'react'
-import { useStore } from '../store'
+import { useStore } from '../../../store'
 import { Icon } from '@iconify/react'
 
 interface SearchProps {
