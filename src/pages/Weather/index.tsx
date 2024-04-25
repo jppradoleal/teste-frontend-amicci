@@ -1,9 +1,10 @@
 import { FormEvent } from "react";
 import { Search } from "../../components/Search";
 import { useStore } from "../../store";
+import { WeatherDisplay } from "../../components/WeatherDisplay";
 
 export function Weather() {
-  const { weather, loadWeather } = useStore(state => ({
+  const { loadWeather } = useStore(state => ({
     weather: state.weather,
     loadWeather: state.loadWeather
   }))
@@ -15,7 +16,7 @@ export function Weather() {
   }
 
   return <main>
-    {JSON.stringify(weather)}
     <Search onSubmit={onSubmit} />
+    <WeatherDisplay />
   </main>
 }
