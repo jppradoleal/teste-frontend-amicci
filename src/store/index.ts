@@ -33,6 +33,7 @@ export interface WeatherAppState {
   getUserPosition: () => Promise<void>;
   loadAddress: () => Promise<void>;
   loadWeather: () => Promise<void>;
+  setAddress: (address: string) => void;
 }
 
 export const useStore = create<WeatherAppState>((set, get) => {
@@ -93,5 +94,10 @@ export const useStore = create<WeatherAppState>((set, get) => {
         weather: data
       })
     },
+    setAddress: (address: string) => {
+      set({
+        address
+      })
+    }
   };
 });
