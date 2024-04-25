@@ -45,7 +45,7 @@ describe("Weather App Store", () => {
   it("should call maps api and fill address attribute", async () => {
     vi.mocked(fetch).mockResolvedValueOnce({
       json: () =>
-        Promise.resolve({ results: [{ formatted_address: "Jacareí" }] }),
+        Promise.resolve({ results: [{ formatted_address: "Jacareí" }, {}, {}, {}] }),
     } as Response);
 
     await store.getState().loadAddress();
@@ -56,4 +56,20 @@ describe("Weather App Store", () => {
 
     expect(address).toBe("Jacareí");
   });
+
+  it("should call api and fill weather attribute", async () => {
+    vi.mocked(fetch).mockResolvedValueOnce({
+      json: () =>
+        Promise.resolve({ id: 1 }),
+    } as Response);
+    
+    await store.getState().loadWeather();
+    
+    const { weather } = store.getState();
+
+    expect(fetch).toHaveBeenCalled();
+
+    expect(weather).toBeDefined();
+    expect(weather?.id).toBe(1);
+  })
 });
