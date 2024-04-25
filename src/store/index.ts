@@ -78,6 +78,8 @@ export const useStore = create<WeatherAppState>((set, get) => {
       set({
         address: data.results[data.results.length-4].formatted_address,
       });
+
+      await get().loadWeather()
     },
     loadWeather: async () => {
       const { address } = get();
@@ -85,7 +87,7 @@ export const useStore = create<WeatherAppState>((set, get) => {
       const response = await fetch(
         `${OPENWEATHER_API}/weather?appid=${
           import.meta.env.VITE_OPENWEATHER_API_KEY
-        }&q=${address}&units=metric`
+        }&q=${address}&units=metric&lang=pt_BR`
       );
 
       const data = await response.json()
