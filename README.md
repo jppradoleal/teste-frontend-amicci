@@ -1,30 +1,55 @@
-# React + TypeScript + Vite
+<img src="https://images.sympla.com.br/62f50b75e7404.png" alt="Amicci Logo"></img>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Amicci - Teste prático para Frontend Javascript React Developer
 
-Currently, two official plugins are available:
+## Acesse o site!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+https://teste-frontend-amicci-bitter-resonance-508.fly.dev/
 
-## Expanding the ESLint configuration
+## Techs
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [x] React.js;
+- [x] Typescript;
+- [x] Zustand;
+- [x] Material UI;
+- [x] Vitest;
+- [x] React Toastify.
 
-- Configure the top-level `parserOptions` property like this:
+## Executando
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
+1. Copie o conteúdo de `.env.example` para `.env`;
+2. Instale as dependências com `npm install`;
+3. Execute o projeto com `npm run dev`;
+4. Acesse `http://localhost:5173`.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Publicação
+
+1. Instale a CLI do [Fly.io](https://fly.io/docs/hands-on/install-flyctl/);
+2. Copie o conteúdo de `.env.example` para `.env.production`;
+3. Preencha as chaves de API;
+4. Execute `fly deploy`.
+
+## Descrição
+
+Você irá construir uma aplicação para consultar e trazer dados sobre o clima. É uma
+aplicação simples, onde terá um único campo de busca para o usuário digitar o
+nome da cidade, um botão para confirmar a busca e outro botão para consultar o
+clima do local do usuário.
+
+Ao clicar no botão de buscar pelo local do usuário, a aplicação deve utilizar a api de
+geolocalização padrão do navegador para pegar a localização do usuário, em
+seguida deve utilizar a api do Google Maps para consultar qual é o nome da cidade
+e por fim, deve utilizar a api OpenWeather para trazer as informações do clima e
+exibir elas na tela (temperatura, clima, umidade do ar e velocidade dos ventos, pode
+exibir outros dados a mais se quiser). Esse mesmo comportamento deve acontecer
+automaticamente ao carregar a página.
+
+No campo de busca o usuário deverá digitar o nome da cidade e ao clicar no botão
+buscar, deverá consultar diretamente a api OpenWeather e exibir os dados que
+encontrar ou, em caso de erro, exibir uma mensagem avisando de que não
+encontrou a cidade.
+
+## Contatos
+
+- Autor - [João Prado](https://www.linkedin.com/in/jppradoleal/)
+- Website - [https://jprado.dev/](https://jprado.dev/)
