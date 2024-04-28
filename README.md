@@ -4,7 +4,7 @@
 
 ## Acesse o site!
 
-https://teste-frontend-amicci-bitter-resonance-508.fly.dev/
+https://teste-frontend-amicci.fly.dev/
 
 ## Techs
 
